@@ -1,1 +1,11 @@
-<p>quickstart-guide works!</p>
+<button class="btn btn-primary btn-sm my-2" (click)="clearSelection()">Clear Selection</button>
+<ag-grid-angular
+  style="width: 500px; height: 500px"
+  class="ag-theme-alpine"
+  [columnDefs]="colDefs"
+  [defaultColDef]="defaultColDef"
+  [rowData]="rowData$ | async"
+  [rowSelection]="'multiple'"
+  [animateRows]="true"
+  (cellClicked)="onCellClicked($event)"
+></ag-grid-angular>
