@@ -7,12 +7,14 @@ import { QuickstartGuideComponent } from './quickstart-guide/quickstart-guide.co
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {AgGridModule} from 'ag-grid-angular';
 import {HttpClientModule} from '@angular/common/http';
+import { EnterpriseOverviewComponent } from './enterprise-overview/enterprise-overview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuickstartGuideComponent,
-    DashboardComponent
+    DashboardComponent,
+    EnterpriseOverviewComponent
   ],
   imports: [
     BrowserModule,
