@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ColDef, GridReadyEvent} from 'ag-grid-community';
 import {HttpClient} from '@angular/common/http';
-import {MyCellComponent} from '../my-cell/my-cell.component';
+import MyCellParams, {MyCellComponent} from '../my-cell/my-cell.component';
 
 @Component({
   templateUrl: './enterprise-overview.component.html',
@@ -10,8 +10,16 @@ import {MyCellComponent} from '../my-cell/my-cell.component';
 })
 export class EnterpriseOverviewComponent implements OnInit {
   public columnDefs: ColDef[] = [
-    {field: 'athlete', cellRenderer: MyCellComponent},
-    {field: 'age', cellRenderer: MyCellComponent},
+    {
+      field: 'athlete', cellRenderer: MyCellComponent, cellRendererParams: {
+        buttonText: 'Name'
+      } as MyCellParams
+    },
+    {
+      field: 'age', cellRenderer: MyCellComponent, cellRendererParams: {
+        buttonText: 'Age'
+      } as MyCellParams
+    },
     {field: 'country'},
     {field: 'year'},
     {field: 'date'},
