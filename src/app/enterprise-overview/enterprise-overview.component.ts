@@ -3,6 +3,9 @@ import {Observable} from 'rxjs';
 import {ColDef, GridReadyEvent} from 'ag-grid-community';
 import {HttpClient} from '@angular/common/http';
 import MyCellParams, {MyCellComponent} from '../my-cell/my-cell.component';
+import {ICellRendererParams} from 'ag-grid-community/dist/lib/rendering/cellRenderers/iCellRenderer';
+import {UnderComponent} from '../under/under.component';
+import {OverComponent} from '../over/over.component';
 
 @Component({
   templateUrl: './enterprise-overview.component.html',
@@ -16,9 +19,11 @@ export class EnterpriseOverviewComponent implements OnInit {
       } as MyCellParams
     },
     {
-      field: 'age', cellRenderer: MyCellComponent, cellRendererParams: {
-        buttonText: 'Age'
-      } as MyCellParams
+      field: 'age', cellRendererSelector: (params: ICellRendererParams) => {
+        return {
+          component: params.value < 25 ? UnderComponent : OverComponent
+        };
+      }
     },
     {field: 'country'},
     {field: 'year'},

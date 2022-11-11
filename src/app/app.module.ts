@@ -11,6 +11,8 @@ import {EnterpriseOverviewComponent} from './enterprise-overview/enterprise-over
 // enable enterprise features
 import 'ag-grid-enterprise';
 import { MyCellComponent } from './my-cell/my-cell.component';
+import { OverComponent } from './over/over.component';
+import { UnderComponent } from './under/under.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { MyCellComponent } from './my-cell/my-cell.component';
     QuickstartGuideComponent,
     DashboardComponent,
     EnterpriseOverviewComponent,
-    MyCellComponent
+    MyCellComponent,
+    OverComponent,
+    UnderComponent
   ],
   imports: [
     BrowserModule,
