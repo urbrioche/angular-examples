@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ColDef, GridReadyEvent} from 'ag-grid-community';
 import {HttpClient} from '@angular/common/http';
-// enable enterprise features
-import 'ag-grid-enterprise';
 
 @Component({
   templateUrl: './enterprise-overview.component.html',

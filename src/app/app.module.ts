@@ -1,13 +1,15 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { QuickstartGuideComponent } from './quickstart-guide/quickstart-guide.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {QuickstartGuideComponent} from './quickstart-guide/quickstart-guide.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 import {AgGridModule} from 'ag-grid-angular';
 import {HttpClientModule} from '@angular/common/http';
-import { EnterpriseOverviewComponent } from './enterprise-overview/enterprise-overview.component';
+import {EnterpriseOverviewComponent} from './enterprise-overview/enterprise-overview.component';
+// enable enterprise features
+import 'ag-grid-enterprise';
 
 @NgModule({
   declarations: [
@@ -25,4 +27,5 @@ import { EnterpriseOverviewComponent } from './enterprise-overview/enterprise-ov
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
