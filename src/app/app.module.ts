@@ -10,13 +10,15 @@ import {HttpClientModule} from '@angular/common/http';
 import {EnterpriseOverviewComponent} from './enterprise-overview/enterprise-overview.component';
 // enable enterprise features
 import 'ag-grid-enterprise';
+import { MyCellComponent } from './my-cell/my-cell.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuickstartGuideComponent,
     DashboardComponent,
-    EnterpriseOverviewComponent
+    EnterpriseOverviewComponent,
+    MyCellComponent
   ],
   imports: [
     BrowserModule,
