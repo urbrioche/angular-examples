@@ -25,7 +25,11 @@ export class EnterpriseOverviewComponent implements OnInit {
         };
       }
     },
-    {field: 'country'},
+    {
+      field: 'country', cellRenderer: (params: ICellRendererParams) => {
+        return `<b> !! ${params.value} </b>`;
+      }
+    },
     {field: 'year'},
     {field: 'date'},
     {field: 'sport'},
