@@ -14,6 +14,8 @@ import { MyCellComponent } from './my-cell/my-cell.component';
 import { OverComponent } from './over/over.component';
 import { UnderComponent } from './under/under.component';
 import { CellRenderOverviewComponent } from './cell-render-overview/cell-render-overview.component';
+import { CustomComponentOverviewComponent } from './custom-component-overview/custom-component-overview.component';
+import { MyCustomComponent } from './my-custom/my-custom.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { CellRenderOverviewComponent } from './cell-render-overview/cell-render-
     MyCellComponent,
     OverComponent,
     UnderComponent,
-    CellRenderOverviewComponent
+    CellRenderOverviewComponent,
+    CustomComponentOverviewComponent,
+    MyCustomComponent
   ],
   imports: [
     BrowserModule,

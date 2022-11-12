@@ -1,17 +1,24 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
 import {ColDef, GridReadyEvent} from 'ag-grid-community';
+import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {MyCustomComponent} from '../my-custom/my-custom.component';
 
 @Component({
-  templateUrl: './enterprise-overview.component.html',
-  styleUrls: ['./enterprise-overview.component.scss']
+  templateUrl: './custom-component-overview.component.html',
+  styleUrls: ['./custom-component-overview.component.scss']
 })
-export class EnterpriseOverviewComponent implements OnInit {
+export class CustomComponentOverviewComponent implements OnInit {
   public columnDefs: ColDef[] = [
     {field: 'athlete'},
     {field: 'age'},
-    {field: 'country'},
+    {
+      field: 'country',
+      filter: MyCustomComponent,
+      filterParams: {
+        name: "Filter"
+      }
+    },
     {field: 'year'},
     {field: 'date'},
     {field: 'sport'},
