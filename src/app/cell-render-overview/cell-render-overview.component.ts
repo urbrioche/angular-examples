@@ -1,21 +1,35 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
 import {ColDef, GridReadyEvent} from 'ag-grid-community';
-import {HttpClient} from '@angular/common/http';
 import MyCellParams, {MyCellComponent} from '../my-cell/my-cell.component';
 import {ICellRendererParams} from 'ag-grid-community/dist/lib/rendering/cellRenderers/iCellRenderer';
 import {UnderComponent} from '../under/under.component';
 import {OverComponent} from '../over/over.component';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
-  templateUrl: './enterprise-overview.component.html',
-  styleUrls: ['./enterprise-overview.component.scss']
+  templateUrl: './cell-render-overview.component.html',
+  styleUrls: ['./cell-render-overview.component.scss']
 })
-export class EnterpriseOverviewComponent implements OnInit {
+export class CellRenderOverviewComponent implements OnInit {
   public columnDefs: ColDef[] = [
-    {field: 'athlete'},
-    {field: 'age'},
-    {field: 'country'},
+    {
+      field: 'athlete', cellRenderer: MyCellComponent, cellRendererParams: {
+        buttonText: 'Name'
+      } as MyCellParams
+    },
+    {
+      field: 'age', cellRendererSelector: (params: ICellRendererParams) => {
+        return {
+          component: params.value < 25 ? UnderComponent : OverComponent
+        };
+      }
+    },
+    {
+      field: 'country', cellRenderer: (params: ICellRendererParams) => {
+        return `<b> !! ${params.value} </b>`;
+      }
+    },
     {field: 'year'},
     {field: 'date'},
     {field: 'sport'},

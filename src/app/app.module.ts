@@ -13,6 +13,7 @@ import 'ag-grid-enterprise';
 import { MyCellComponent } from './my-cell/my-cell.component';
 import { OverComponent } from './over/over.component';
 import { UnderComponent } from './under/under.component';
+import { CellRenderOverviewComponent } from './cell-render-overview/cell-render-overview.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UnderComponent } from './under/under.component';
     EnterpriseOverviewComponent,
     MyCellComponent,
     OverComponent,
-    UnderComponent
+    UnderComponent,
+    CellRenderOverviewComponent
   ],
   imports: [
     BrowserModule,

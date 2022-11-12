@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {QuickstartGuideComponent} from './quickstart-guide/quickstart-guide.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {EnterpriseOverviewComponent} from './enterprise-overview/enterprise-overview.component';
+import {CellRenderOverviewComponent} from './cell-render-overview/cell-render-overview.component';
 
 
 const routes: Routes = [
@@ -10,6 +11,7 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'quickstart-guide', component: QuickstartGuideComponent},
   {path: 'enterprise-overview', component: EnterpriseOverviewComponent},
+  {path: 'cell-render-overview', component: CellRenderOverviewComponent},
 ];
 
 @NgModule({
