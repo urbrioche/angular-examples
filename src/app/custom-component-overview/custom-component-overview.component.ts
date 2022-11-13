@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ColDef, GridReadyEvent} from 'ag-grid-community';
+import {ColDef, GridReadyEvent, SideBarDef, StatusPanelDef} from 'ag-grid-community';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {MyCustomComponent} from '../my-custom/my-custom.component';
@@ -15,6 +15,41 @@ export class CustomComponentOverviewComponent implements OnInit {
   components = {
     hello: HelloComponent,
     goodbye: GoodbyeComponent
+  };
+
+  public sideBar: SideBarDef = {
+    toolPanels: [
+      'columns',
+      'filters',
+      {
+        id: 'customComp',
+        labelDefault: 'Custom Comp',
+        labelKey: 'customComp',
+        iconKey: 'custom-Comp',
+        toolPanel: HelloComponent,
+      },
+    ],
+    // 加上這行，sideBar預設會展開下面的component
+    // defaultToolPanel: 'customComp',
+  };
+
+  public statusBar: {
+    statusPanels: StatusPanelDef[];
+  } = {
+    statusPanels: [
+      {
+        statusPanel: HelloComponent,
+      },
+      {
+        statusPanel: GoodbyeComponent,
+      },
+      {
+        statusPanel: 'agAggregationComponent',
+        statusPanelParams: {
+          aggFuncs: ['count', 'sum'],
+        },
+      },
+    ],
   };
 
   public columnDefs: ColDef[] = [
