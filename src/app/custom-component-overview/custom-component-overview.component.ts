@@ -12,6 +12,11 @@ import {GoodbyeComponent} from '../goodbye/goodbye.component';
   styleUrls: ['./custom-component-overview.component.scss']
 })
 export class CustomComponentOverviewComponent implements OnInit {
+  components = {
+    hello: HelloComponent,
+    goodbye: GoodbyeComponent
+  }
+
   public columnDefs: ColDef[] = [
     {
       field: 'athlete',
@@ -27,7 +32,9 @@ export class CustomComponentOverviewComponent implements OnInit {
         }
 
         return {
-          component: GoodbyeComponent,
+          // component: GoodbyeComponent,
+          // 定義components，並使用字串
+          component: 'goodbye',
           params: {
             name: params.data?.athlete
           }
@@ -62,6 +69,7 @@ export class CustomComponentOverviewComponent implements OnInit {
     {field: 'bronze'},
     {field: 'total'},
   ];
+
   public defaultColDef: ColDef = {
     sortable: true,
     filter: true,
