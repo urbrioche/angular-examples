@@ -3,6 +3,9 @@ import {ColDef, GridReadyEvent} from 'ag-grid-community';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {MyCustomComponent} from '../my-custom/my-custom.component';
+import {ICellRendererParams} from 'ag-grid-community/dist/lib/rendering/cellRenderers/iCellRenderer';
+import {HelloComponent} from '../hello/hello.component';
+import {GoodbyeComponent} from '../goodbye/goodbye.component';
 
 @Component({
   templateUrl: './custom-component-overview.component.html',
@@ -10,7 +13,25 @@ import {MyCustomComponent} from '../my-custom/my-custom.component';
 })
 export class CustomComponentOverviewComponent implements OnInit {
   public columnDefs: ColDef[] = [
-    {field: 'athlete'},
+    {
+      field: 'athlete', cellRendererSelector: (params: ICellRendererParams<OlympicWinner>) => {
+        if (params.data?.age! < 24) {
+          return {
+            component: HelloComponent,
+            params: {
+              name: params.data?.athlete
+            }
+          };
+        }
+
+        return {
+          component: GoodbyeComponent,
+          params: {
+            name: params.data?.athlete
+          }
+        };
+      }
+    },
     {field: 'age'},
     {
       field: 'country',
