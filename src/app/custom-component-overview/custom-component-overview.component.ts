@@ -15,7 +15,7 @@ export class CustomComponentOverviewComponent implements OnInit {
   components = {
     hello: HelloComponent,
     goodbye: GoodbyeComponent
-  }
+  };
 
   public columnDefs: ColDef[] = [
     {
@@ -61,7 +61,13 @@ export class CustomComponentOverviewComponent implements OnInit {
       //   name: "Filter"
       // }
     },
-    {field: 'year'},
+    {
+      field: 'year',
+      // 試試設定不同的component
+      // https://www.ag-grid.com/angular-data-grid/components/#grid-provided-components
+      // filter: 'agNumberColumnFilter',
+      filter: 'agTextColumnFilter',
+    },
     {field: 'date'},
     {field: 'sport'},
     {field: 'gold'},
