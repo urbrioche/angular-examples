@@ -14,7 +14,9 @@ import {GoodbyeComponent} from '../goodbye/goodbye.component';
 export class CustomComponentOverviewComponent implements OnInit {
   public columnDefs: ColDef[] = [
     {
-      field: 'athlete', cellRendererSelector: (params: ICellRendererParams<OlympicWinner>) => {
+      field: 'athlete',
+      // https://www.ag-grid.com/angular-data-grid/components/#component-usage
+      cellRendererSelector: (params: ICellRendererParams<OlympicWinner>) => {
         if (params.data?.age! < 24) {
           return {
             component: HelloComponent,
