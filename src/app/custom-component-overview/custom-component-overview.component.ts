@@ -17,7 +17,19 @@ export class CustomComponentOverviewComponent implements OnInit {
       filter: MyCustomComponent,
       filterParams: {
         name: "Filter"
-      }
+      },
+      // 同一個component可以放在不同的地方
+      // 但是使用的"Params"不同
+      // 即使 MyCustomComponent是implement IHeaderAngularComp也可以用在任何的地方
+      // 因為本質上最後就是轉譯成JavaScript，或是從TypeScript是duck typing來想就一點都不會覺得奇怪了
+      // cellRenderer: MyCustomComponent,
+      // cellRendererParams: {
+      //   name: "Filter"
+      // },
+      // headerComponent: MyCustomComponent,
+      // headerComponentParams: {
+      //   name: "Filter"
+      // }
     },
     {field: 'year'},
     {field: 'date'},
