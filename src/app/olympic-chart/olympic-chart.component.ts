@@ -4,6 +4,7 @@ import HighchartsExporting from 'highcharts/modules/exporting';
 import HighchartsOfflineExporting from 'highcharts/modules/offline-exporting';
 import * as _ from 'lodash';
 import {OlympicWinner} from '../types/olympic.winner';
+import {copyChartToClipboard} from '../utils/highcharts-util';
 
 HighchartsExporting(Highcharts);
 HighchartsOfflineExporting(Highcharts);
@@ -107,29 +108,19 @@ export class OlympicChartComponent implements OnInit, OnChanges {
         enabled: false
       },
       exporting: {
-        // menuItem
-        //   // Custom definition
-        //   adjustYAxis: {
-        //     onclick: () => {
-        //       showModal().then(x => {
-        //         const obj = x as { [key: string]: number };
-        //         chartRef.current?.yAxis[0].setExtremes(obj['min'], obj['max']);
-        //       });
-        //     },
-        //     text: 'Adjust Y-Axis'
-        //   },
-        //   toggleLegend: {
-        //     onclick: function () {
-        //       this.legend.update({enabled: !this.legend.options.enabled});
-        //     },
-        //     text: 'Show/Hide Legend'
-        //   },
-        // },
-        // buttons: {
-        //   contextButton: {
-        //     menuItems: ['toggleLegend', 'adjustYAxis']
-        //   }
-        // }
+        menuItemDefinitions: {
+          copyToClipboard: {
+            onclick: function () {
+              copyChartToClipboard(this).then().catch(e => console.error(e));
+            },
+            text: 'Copy to clipboard'
+          },
+        },
+        buttons: {
+          contextButton: {
+            menuItems: ['copyToClipboard']
+          }
+        }
       },
       series: series,
     };
