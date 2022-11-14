@@ -18,6 +18,9 @@ import { CustomComponentOverviewComponent } from './custom-component-overview/cu
 import { MyCustomComponent } from './my-custom/my-custom.component';
 import { HelloComponent } from './hello/hello.component';
 import { GoodbyeComponent } from './goodbye/goodbye.component';
+import { HighchartInGridOverviewComponent } from './highchart-in-grid-overview/highchart-in-grid-overview.component';
+import { OlympicChartComponent } from './olympic-chart/olympic-chart.component';
+import { AgHighchartCellComponent } from './ag-highchart-cell/ag-highchart-cell.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { GoodbyeComponent } from './goodbye/goodbye.component';
     CustomComponentOverviewComponent,
     MyCustomComponent,
     HelloComponent,
-    GoodbyeComponent
+    GoodbyeComponent,
+    HighchartInGridOverviewComponent,
+    OlympicChartComponent,
+    AgHighchartCellComponent
   ],
   imports: [
     BrowserModule,
