@@ -11,3 +11,10 @@
 | [Highcharts copy to clipboard](src/app/utils/highcharts-util.ts)   | Highcharts copy png to clipboard實作   |
 | [Angular Plotly.js Contour](src/app/plotly-contour)                | Plotly.js在Angular如何設定，並畫出contour map |
 
+## 參考資料
++ AG Grid 官方網站
+  + https://www.ag-grid.com/angular-data-grid/
++ Highcharts 官方網站 API
+  + https://api.highcharts.com/highcharts/
++ Angular Plotly GitHub
+  + https://github.com/plotly/angular-plotly.js
