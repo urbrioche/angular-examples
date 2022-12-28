@@ -1,3 +1,4 @@
+<button class="btn btn-primary" (click)="export()">Export</button>
 <ag-grid-angular
   style="width: 95%; height: 500px"
   class="ag-theme-alpine"
@@ -5,6 +6,7 @@
   [defaultColDef]="defaultColDef"
   [rowData]="rowData$ | async"
   [rowHeight]="400"
-  (gridReady)="onGridReady()"
+  (gridReady)="onGridReady($event)"
+  [defaultExcelExportParams]="defaultExcelExportParams"
 ></ag-grid-angular>
 

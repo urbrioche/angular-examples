@@ -5,6 +5,7 @@ import HighchartsOfflineExporting from 'highcharts/modules/offline-exporting';
 import * as _ from 'lodash';
 import {OlympicWinner} from '../types/olympic.winner';
 import {copyChartToClipboard} from '../utils/highcharts-util';
+import {Chart} from 'highcharts';
 
 HighchartsExporting(Highcharts);
 HighchartsOfflineExporting(Highcharts);
@@ -20,6 +21,8 @@ export class OlympicChartComponent implements OnInit, OnChanges {
   data?: OlympicWinner[];
   @Input()
   sportName?: string;
+  renderTo?: HTMLElement | string;
+  chart?: Chart;
 
   constructor(private ele: ElementRef) {
   }
@@ -125,6 +128,6 @@ export class OlympicChartComponent implements OnInit, OnChanges {
       series: series,
     };
 
-    Highcharts.chart(this.ele.nativeElement, options);
+    this.chart = Highcharts.chart(this.renderTo || this.ele.nativeElement, options);
   }
 }

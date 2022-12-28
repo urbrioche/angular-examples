@@ -9,4 +9,6 @@ export interface OlympicWinner {
   silver: number;
   bronze: number;
   total: number;
+
+  base64Image?: string;
 }
