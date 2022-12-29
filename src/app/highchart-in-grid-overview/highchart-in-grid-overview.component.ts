@@ -6,6 +6,7 @@ import {OlympicWinner} from '../types/olympic.winner';
 import {AgHighchartCellComponent} from '../ag-highchart-cell/ag-highchart-cell.component';
 import {OlympicChartComponent} from '../olympic-chart/olympic-chart.component';
 import {highChartToDataUrl} from '../utils/highcharts-util';
+import {RowHeightCallbackParams} from 'ag-grid-community/dist/lib/interfaces/iExcelCreator';
 
 @Component({
   templateUrl: './highchart-in-grid-overview.component.html',
@@ -31,6 +32,7 @@ export class HighchartInGridOverviewComponent implements OnInit {
   private gridApi!: GridApi<GridRowData>;
   private params!: GridReadyEvent<OlympicWinner>;
   defaultExcelExportParams: ExcelExportParams = {
+    rowHeight: (params: RowHeightCallbackParams) => params.rowIndex >= 2 ? 400 : 25,
     addImageToCell: (rowIndex, col, value) => {
       console.log(rowIndex, col);
       if (col.getColId() !== 'chart') {
@@ -39,15 +41,15 @@ export class HighchartInGridOverviewComponent implements OnInit {
 
 
       console.log(rowIndex, this.gridApi.getModel().getRow(rowIndex)?.data);
-      const img = this.gridApi.getModel().getRow(rowIndex)?.data?.base64Image;
+      const img = this.gridApi.getModel().getRow(rowIndex - 2)?.data?.base64Image;
       // console.log(img);
       return {
         image: {
-          id: this.gridApi.getModel().getRow(rowIndex)?.data?.sport,
+          id: this.gridApi.getModel().getRow(rowIndex - 2)?.data?.sport,
           base64: img,
           imageType: 'png',
-          width: 400,
-          height: 200,
+          width: 600,
+          height: 400,
           position: {
             offsetX: 30,
             offsetY: 5.5,
