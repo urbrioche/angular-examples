@@ -1,4 +1,13 @@
-<button class="btn btn-primary" (click)="export()">Export</button>
+<div class="my-1">
+  <button class="btn btn-primary me-1" (click)="export()" [disabled]="exportingStatus==='processing'">Export</button>
+  <button class="btn btn-warning" (click)="cancel()" *ngIf="exportingStatus === 'processing'">Cancel</button>
+</div>
+<div class="progress" style="height: 20px; width: 95%" role="progressbar" *ngIf="exportingStatus==='processing'">
+  <div class="progress-bar bg-success"
+       [attr.aria-valuenow]="exportingProgress" aria-valuemin="0" aria-valuemax="100"
+       [style.width.%]="exportingProgress">{{exportingProgress}}%
+  </div>
+</div>
 <ag-grid-angular
   style="width: 95%; height: 500px"
   class="ag-theme-alpine"

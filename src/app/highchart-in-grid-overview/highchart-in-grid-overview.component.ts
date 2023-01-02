@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {ColDef, ExcelExportParams, GridApi, GridReadyEvent} from 'ag-grid-community';
-import {forkJoin, from, map, mergeMap, Observable, of} from 'rxjs';
+import {concatAll, defer, delay, forkJoin, from, map, Observable, Subject, takeUntil, tap} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {OlympicWinner} from '../types/olympic.winner';
 import {AgHighchartCellComponent} from '../ag-highchart-cell/ag-highchart-cell.component';
@@ -14,42 +14,37 @@ import {RowHeightCallbackParams} from 'ag-grid-community/dist/lib/interfaces/iEx
 })
 export class HighchartInGridOverviewComponent implements OnInit {
 
-  public columnDefs: ColDef[] = [
+  columnDefs: ColDef[] = [
     {field: 'sport'},
     {
-      field: 'chart',
+      field: 'base64Image',
       headerName: 'Chart',
       width: 1000,
       cellRenderer: AgHighchartCellComponent
     }
   ];
-  public defaultColDef: ColDef = {
+  defaultColDef: ColDef = {
     sortable: true,
     filter: true,
   };
 
-  public rowData$!: Observable<{ sport: string, data: OlympicWinner[] }[]>;
-  private gridApi!: GridApi<GridRowData>;
-  private params!: GridReadyEvent<OlympicWinner>;
+  rowData$!: Observable<{ sport: string, data: OlympicWinner[] }[]>;
+  exportingStatus: ExportingStatus = 'none';
+  cancelExporting$: Subject<void> = new Subject<void>();
   defaultExcelExportParams: ExcelExportParams = {
     rowHeight: (params: RowHeightCallbackParams) => params.rowIndex >= 2 ? 400 : 25,
     addImageToCell: (rowIndex, col, value) => {
-      console.log(rowIndex, col);
-      if (col.getColId() !== 'chart') {
+      if (col.getColId() !== 'base64Image') {
         return;
       }
 
-
-      console.log(rowIndex, this.gridApi.getModel().getRow(rowIndex)?.data);
-      const img = this.gridApi.getModel().getRow(rowIndex - 2)?.data?.base64Image;
-      // console.log(img);
       return {
         image: {
-          id: this.gridApi.getModel().getRow(rowIndex - 2)?.data?.sport,
-          base64: img,
+          id: `${rowIndex}`,
+          base64: value,
           imageType: 'png',
-          width: 600,
-          height: 400,
+          width: 800,
+          height: 600,
           position: {
             offsetX: 30,
             offsetY: 5.5,
@@ -58,11 +53,19 @@ export class HighchartInGridOverviewComponent implements OnInit {
       };
     },
   };
+  exportingProgress: number = 0;
+  currentCount = 0;
+  private gridApi!: GridApi<GridRowData>;
 
   constructor(private http: HttpClient, private vcr: ViewContainerRef) {
   }
 
   ngOnInit(): void {
+    this.cancelExporting$.subscribe(() => {
+      this.exportingStatus = 'cancel';
+      this.exportingProgress = 0;
+    });
+
   }
 
   onGridReady(params: GridReadyEvent<GridRowData>) {
@@ -82,71 +85,95 @@ export class HighchartInGridOverviewComponent implements OnInit {
   }
 
   export(): void {
+    this.exportingStatus = 'processing';
+    this.currentCount = 0;
     const data: GridRowData[] = [];
-    this.gridApi.forEachNode(async (x) => {
+    this.gridApi.forEachNode((x) => {
       const rowData = x.data!;
-      // const component = this.vcr.createComponent(OlympicChartComponent);
-      // component.instance.data = rowData.data;
-      // component.instance.renderTo = document.createElement('div');
-      // component.instance.sportName = rowData.sport;
-      // component.instance.createChart();
-      // const hc = component.instance.chart;
-      // const base64Img = await highChartToDataUrl(hc!);
-      // rowData.base64Image = base64Img;
       data.push(rowData);
     });
 
+    setTimeout(() => {
+      this.exportByConcatAll(data);
+    }, 0);
+
+    // setTimeout(() => {
+    //   this.exportByForkJoin(data);
+    // }, 0);
+  }
+
+  private exportByForkJoin(data: GridRowData[]) {
+    // forJoin的問題是，進度條會hang，前面沒進度，後面跳很快 (js為單一執行緒的關係)
     forkJoin(data.map(row => {
-      const component = this.vcr.createComponent(OlympicChartComponent);
-      component.instance.data = row.data;
-      component.instance.renderTo = document.createElement('div');
-      component.instance.sportName = row.sport;
-      component.instance.createChart();
-      const hc = component.instance.chart;
-      return from(highChartToDataUrl(hc!)).pipe(map(x => {
-        row.base64Image = x;
-        return row;
-      }));
+      return defer(() => {
+        return this.convertHighchartsToDataUrl(row);
+      }).pipe(
+        tap(() => {
+          console.log("convert by forkJoin");
+          this.currentCount++;
+          this.exportingProgress = Math.round(this.currentCount / data.length * 100);
+        }),
+        delay(500),
+        map(x => {
+          row.base64Image = x;
+          return row;
+        }));
     })).subscribe(data => {
-      // console.log(data);
-      this.gridApi.exportDataAsExcel();
+      if (this.exportingStatus !== 'cancel') {
+        console.log('forkJoin done');
+        this.gridApi.exportDataAsExcel();
+        this.exportingStatus = 'completed';
+      }
     });
-    // from(data.map(row => row)).pipe(
-    //   mergeMap(row => {
-    //     const component = this.vcr.createComponent(OlympicChartComponent);
-    //     component.instance.data = row.data;
-    //     component.instance.renderTo = document.createElement('div');
-    //     component.instance.sportName = row.sport;
-    //     component.instance.createChart();
-    //     const hc = component.instance.chart;
-    //     return from(highChartToDataUrl(hc!));
-    //   })
-    // from(data.map(row => row)).pipe(
-    //   mergeMap(row => {
-    //     const component = this.vcr.createComponent(OlympicChartComponent);
-    //     component.instance.data = row.data;
-    //     component.instance.renderTo = document.createElement('div');
-    //     component.instance.sportName = row.sport;
-    //     component.instance.createChart();
-    //     const hc = component.instance.chart;
-    //     return from(highChartToDataUrl(hc!));
-    //   })
-    // ).subscribe(x => console.log(x));
+  }
 
-    // of(Promise.all(data.map(row => {
-    //   const component = this.vcr.createComponent(OlympicChartComponent);
-    //   component.instance.data = row.data;
-    //   component.instance.renderTo = document.createElement('div');
-    //   component.instance.sportName = row.sport;
-    //   component.instance.createChart();
-    //   const hc = component.instance.chart;
-    //   return from(highChartToDataUrl(hc!));
-    // })).subscribe(data=>{
-    //   console.log(data);
-    // })
+  private exportByConcatAll(data: GridRowData[]) {
+    from(data.map(row => {
+      // promise is eager, although no subscribe, still execute highChartToDataUrl promise
+      // here use defer to make it lazy executing while subscribe
+      return defer(() => {
+        return this.convertHighchartsToDataUrl(row);
+      }).pipe(
+        delay(1),
+        tap(() => console.log('converting to base64 image')),
+        map(x => {
+          row.base64Image = x;
+          return row;
+        }));
+    })).pipe(
+      concatAll(),
+      takeUntil(this.cancelExporting$),
+      tap(() => {
+        this.currentCount++;
+        this.exportingProgress = Math.round(this.currentCount / data.length * 100);
+      })
+    ).subscribe({
+      next: (data) => {
+        console.log('image converted:', data);
+      },
+      complete: () => {
+        console.log('complete');
+        if (this.exportingStatus !== 'cancel') {
+          this.gridApi.exportDataAsExcel();
+          this.exportingStatus = 'completed';
+        }
+      },
+    });
+  }
 
+  private convertHighchartsToDataUrl(row: GridRowData) {
+    const component = this.vcr.createComponent(OlympicChartComponent);
+    const instance = component.instance;
+    instance.data = row.data;
+    instance.renderTo = document.createElement('div');
+    instance.sportName = row.sport;
+    instance.createChart();
+    const hc = instance.chart;
+    return highChartToDataUrl(hc!, {sourceWidth: 800, sourceHeight: 600});
+  }
 
-    // console.log(data);
+  cancel(): void {
+    this.cancelExporting$.next();
   }
 }
 
@@ -155,4 +182,6 @@ interface GridRowData {
   data: OlympicWinner[];
   base64Image?: string;
 }
+
+type ExportingStatus = 'none' | 'processing' | 'completed' | 'cancel'
 

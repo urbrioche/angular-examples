@@ -50,13 +50,14 @@
 // }
 /* eslint-disable jsdoc/require-jsdoc,@typescript-eslint/no-explicit-any */
 import * as Highcharts from 'highcharts';
+import {ExportingOptions} from "highcharts";
 
-export function highChartToDataUrl(chart: Highcharts.Chart & HighchartsExt): Promise<string> {
-  return highChartConverterCore<string>(chart, 'string');
+export function highChartToDataUrl(chart: Highcharts.Chart & HighchartsExt, options?: ExportingOptions): Promise<string> {
+  return highChartConverterCore<string>(chart, 'string', options);
 }
 
-export function highChartToBlob(chart: Highcharts.Chart & HighchartsExt): Promise<Blob> {
-  return highChartConverterCore<Blob>(chart, 'blob');
+export function highChartToBlob(chart: Highcharts.Chart & HighchartsExt, options?: ExportingOptions): Promise<Blob> {
+  return highChartConverterCore<Blob>(chart, 'blob', options);
 }
 
 export async function copyChartToClipboard(chart: Highcharts.Chart & HighchartsExt): Promise<void> {
@@ -65,13 +66,16 @@ export async function copyChartToClipboard(chart: Highcharts.Chart & HighchartsE
   await navigator.clipboard.write(data);
 }
 
-function highChartConverterCore<T extends string | Blob>(chart: Highcharts.Chart & HighchartsExt, mediaType: 'string' | 'blob') {
-  const exportingOptions = chart.options.exporting;
+function highChartConverterCore<T extends string | Blob>(
+  chart: Highcharts.Chart & HighchartsExt,
+  mediaType: 'string' | 'blob',
+  options?: ExportingOptions
+) {
+  const exportingOptions = {...chart.options.exporting, ...(options ?? {})};
   const noop = (e: any): void => {
     console.error('highChartConverterCore error:', e);
   };
 
-  const options: Highcharts.Options = {};
   // use promise to make sure image onload event is fired.
   return new Promise<T>((resolve, reject) => {
     try {
