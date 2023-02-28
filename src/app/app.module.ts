@@ -28,6 +28,7 @@ import * as PlotlyJS from 'plotly.js-dist-min';
 // 寫成下面會compile error
 // import * as PlotlyJS from 'plotly.js';
 import {PlotlyModule} from 'angular-plotly.js';
+import { NgZoneOverviewComponent } from './ng-zone-overview/ng-zone-overview.component';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -48,7 +49,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     HighchartInGridOverviewComponent,
     OlympicChartComponent,
     AgHighchartCellComponent,
-    PlotlyContourComponent
+    PlotlyContourComponent,
+    NgZoneOverviewComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import {CellRenderOverviewComponent} from './cell-render-overview/cell-render-ov
 import {CustomComponentOverviewComponent} from './custom-component-overview/custom-component-overview.component';
 import {HighchartInGridOverviewComponent} from './highchart-in-grid-overview/highchart-in-grid-overview.component';
 import {PlotlyContourComponent} from './plotly-contour/plotly-contour.component';
+import {NgZoneOverviewComponent} from './ng-zone-overview/ng-zone-overview.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'custom-component-overview', component: CustomComponentOverviewComponent},
   {path: 'highchart-in-grid-overview', component: HighchartInGridOverviewComponent},
   {path: 'plotly-contour', component: PlotlyContourComponent},
+  {path: 'ng-zone-overview', component: NgZoneOverviewComponent},
 ];
 
 @NgModule({
