@@ -1,0 +1,56 @@
+<div class="m-2">
+
+
+  <div>Normal change detect</div>
+  <button
+    (click)="increase1(-1)"
+    class="btn btn-sm btn-outline-primary me-2"
+    type="button"
+  >
+    -
+  </button>
+
+  <button
+    (click)="increase1(1)"
+    class="btn btn-sm btn-outline-primary"
+    type="button"
+  >
+    +
+  </button>
+  <div class="d-flex border px-4 py-2 my-2 justify-content-center" style="width: 20px">
+    {{ count1 }}
+  </div>
+  <hr>
+  <div>Browser event run outside angular</div>
+  <li>請打開console，點擊button，觀察count的變化</li>
+  <li>藉由enable/disable setInterval來改變畫面上的count</li>
+  <div class="my-4">
+
+    <button
+      #btnMinus
+      class="btn btn-sm btn-outline-primary me-2"
+      data-value="-1"
+      type="button"
+    >
+      -
+    </button>
+
+    <button
+      #btnIncrease
+      class="btn btn-sm btn-outline-primary me-2"
+      data-value="1"
+      type="button"
+    >
+      +
+    </button>
+
+    <button (click)="toggleSetInterval()"
+            class="btn btn-sm btn-outline-danger">{{this.enableSetInterval ? 'Disable' : 'Enable'}} setInterval
+    </button>
+  </div>
+  <!--<button type="button" id="refresh2">Refresh2</button>-->
+  <div class="d-flex border px-4 py-2 my-2 justify-content-center" style="width: 20px">
+    {{ count2 }}
+  </div>
+
+</div>
