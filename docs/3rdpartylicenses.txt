@@ -10,6 +10,117 @@ MIT
 @angular/router
 MIT
 
+@liff/analytics
+SEE LICENSE IN README.md
+
+@liff/check-availability
+SEE LICENSE IN README.md
+
+@liff/close-window
+SEE LICENSE IN README.md
+
+@liff/consts
+SEE LICENSE IN README.md
+
+@liff/extensions
+SEE LICENSE IN README.md
+
+@liff/get-friendship
+SEE LICENSE IN README.md
+
+@liff/get-language
+SEE LICENSE IN README.md
+
+@liff/get-line-version
+SEE LICENSE IN README.md
+
+@liff/get-os
+SEE LICENSE IN README.md
+
+@liff/get-profile
+SEE LICENSE IN README.md
+
+@liff/get-version
+SEE LICENSE IN README.md
+
+@liff/hooks
+SEE LICENSE IN README.md
+
+@liff/i18n
+SEE LICENSE IN README.md
+
+@liff/init
+SEE LICENSE IN README.md
+
+@liff/is-api-available
+SEE LICENSE IN README.md
+
+@liff/is-in-client
+SEE LICENSE IN README.md
+
+@liff/is-logged-in
+SEE LICENSE IN README.md
+
+@liff/is-sub-window
+SEE LICENSE IN README.md
+
+@liff/logger
+SEE LICENSE IN README.md
+
+@liff/login
+SEE LICENSE IN README.md
+
+@liff/logout
+SEE LICENSE IN README.md
+
+@liff/message-bus
+SEE LICENSE IN README.md
+
+@liff/native-bridge
+SEE LICENSE IN README.md
+
+@liff/open-window
+SEE LICENSE IN README.md
+
+@liff/permanent-link
+SEE LICENSE IN README.md
+
+@liff/permission
+SEE LICENSE IN README.md
+
+@liff/ready
+SEE LICENSE IN README.md
+
+@liff/scan-code-v2
+SEE LICENSE IN README.md
+
+@liff/send-messages
+SEE LICENSE IN README.md
+
+@liff/server-api
+SEE LICENSE IN README.md
+
+@liff/share-target-picker
+SEE LICENSE IN README.md
+
+@liff/store
+SEE LICENSE IN README.md
+
+@liff/sub-window
+SEE LICENSE IN README.md
+
+@liff/use
+SEE LICENSE IN README.md
+
+@liff/util
+SEE LICENSE IN README.md
+
+@liff/window-postmessage
+SEE LICENSE IN README.md
+
+@line/liff
+SEE LICENSE IN README.md
+
 ag-grid-angular
 MIT
 
@@ -2193,6 +2304,9 @@ Apache-2.0
  
 
 
+tiny-sha256
+Public domain
+
 tslib
 0BSD
 Copyright (c) Microsoft Corporation.
@@ -2207,6 +2321,30 @@ INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
 LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
+
+whatwg-fetch
+MIT
+Copyright (c) 2014-2023 GitHub, Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 
 zone.js
 MIT
