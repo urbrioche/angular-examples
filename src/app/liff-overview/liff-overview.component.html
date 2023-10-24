@@ -1,0 +1,50 @@
+<div class="ms-5">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>picture</td>
+            <td>
+                <img [src]="picture"
+                     style="border-radius: 50%; width: 31px; height: 31px"/>
+            </td>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td>{{decodedIdToken?.name}}</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>{{decodedIdToken?.email}}</td>
+        </tr>
+        <tr>
+            <td>os</td>
+            <td>{{os}}</td>
+        </tr>
+        <tr>
+            <td>os</td>
+            <td>{{os}}</td>
+        </tr>
+        <tr>
+            <td>profile</td>
+            <td>{{profile | json}}</td>
+        </tr>
+        <tr>
+            <td>friendship</td>
+            <td>{{friendship}}</td>
+        </tr>
+        <tr>
+            <td>scanCodeV2</td>
+            <td>
+                <button (click)="scanCode()" class="btn btn-primary">Scan</button>
+                <textarea [value]="scanCodeResult" class="form-control mt-2"></textarea>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

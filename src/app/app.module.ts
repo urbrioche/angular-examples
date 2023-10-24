@@ -28,39 +28,41 @@ import * as PlotlyJS from 'plotly.js-dist-min';
 // 寫成下面會compile error
 // import * as PlotlyJS from 'plotly.js';
 import {PlotlyModule} from 'angular-plotly.js';
-import { NgZoneOverviewComponent } from './ng-zone-overview/ng-zone-overview.component';
+import {NgZoneOverviewComponent} from './ng-zone-overview/ng-zone-overview.component';
+import {LiffOverviewComponent} from './liff-overview/liff-overview.component';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    QuickstartGuideComponent,
-    DashboardComponent,
-    EnterpriseOverviewComponent,
-    MyCellComponent,
-    OverComponent,
-    UnderComponent,
-    CellRenderOverviewComponent,
-    CustomComponentOverviewComponent,
-    MyCustomComponent,
-    HelloComponent,
-    GoodbyeComponent,
-    HighchartInGridOverviewComponent,
-    OlympicChartComponent,
-    AgHighchartCellComponent,
-    PlotlyContourComponent,
-    NgZoneOverviewComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    AgGridModule,
-    PlotlyModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        QuickstartGuideComponent,
+        DashboardComponent,
+        EnterpriseOverviewComponent,
+        MyCellComponent,
+        OverComponent,
+        UnderComponent,
+        CellRenderOverviewComponent,
+        CustomComponentOverviewComponent,
+        MyCustomComponent,
+        HelloComponent,
+        GoodbyeComponent,
+        HighchartInGridOverviewComponent,
+        OlympicChartComponent,
+        AgHighchartCellComponent,
+        PlotlyContourComponent,
+        NgZoneOverviewComponent,
+        LiffOverviewComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        AgGridModule,
+        PlotlyModule,
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
