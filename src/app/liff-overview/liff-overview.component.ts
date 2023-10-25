@@ -13,7 +13,7 @@ type OS = ReturnType<typeof liff.getOS>
 export class LiffOverviewComponent implements OnInit {
     liffId = '2000461397-MVoQBAp4';
     protected decodedIdToken!: JwtPayload | null;
-    protected picture = '../assets/images/users/profile.png';
+    protected picture = 'assets/images/users/profile.png';
     protected os: OS;
     protected profile?: Profile;
     protected friendship?: boolean;
